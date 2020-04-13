@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar build/libs/z1-all.jar <&0
