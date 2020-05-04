@@ -3,16 +3,8 @@
  *
  * This generated file contains a sample Java project to get you started.
  * For more details take a look at the Java Quickstart chapter in the Gradle
- * User Manual available at https://docs.gradle.org/6.0.1/userguide/tutorial_java_projects.html
+ * User Manual available at https://docs.gradle.org/6.3/userguide/tutorial_java_projects.html
  */
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
-    }
-}
 
 plugins {
     // Apply the java plugin to add support for Java
@@ -21,11 +13,8 @@ plugins {
     // Apply the application plugin to add support for building a CLI application.
     id 'application'
 
-    id 'idea'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
 }
-
-apply plugin: 'com.github.johnrengelman.shadow'
-
 
 repositories {
     // Use jcenter for resolving dependencies.
@@ -35,7 +24,7 @@ repositories {
 
 dependencies {
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:28.0-jre'
+    implementation 'com.google.guava:guava:28.2-jre'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
