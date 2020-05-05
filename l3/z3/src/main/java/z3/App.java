@@ -1,34 +1,58 @@
 package z3;
 
+import z3.GeneticAlgorithm.Crossover.SinglePointCrossover;
 import z3.GeneticAlgorithm.GeneticAlgorithm;
+import z3.GeneticAlgorithm.Genotype;
+import z3.GeneticAlgorithm.InitialPopulation.GivenPopulation;
+import z3.GeneticAlgorithm.Mutation.LetterMutation;
+import z3.GeneticAlgorithm.Selection.RouletteWheel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class App {
 
+    public static int populationSizeLimit;
+
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
-        inputParser.getInput();
-        List<Letter> letters = inputParser.getLetters();
-        List<String> words = inputParser.getWords();
+        ArrayList<ArrayList<Integer>> board = inputParser.getInput();
+        drawBoard(board);
         int maxTime = inputParser.getMaxTime();
+        populationSizeLimit = inputParser.getPopulationSizeLimit();
+        List<String> initialPaths = inputParser.getInitialPaths();
 
-        WordScoreFunction fitnessFunction = new WordScoreFunction(words, letters);
+        //Create initial population
+        List<Genotype> initialPopulation = new ArrayList<>();
+        for (String initialPath : initialPaths) {
+            initialPopulation.add(new Genotype(initialPath));
+        }
 
-        z3.GeneticAlgorithm.GeneticAlgorithm geneticAlgorithm = new z3.GeneticAlgorithm.GeneticAlgorithm(
+        PathTestFunction fitnessFunction = new PathTestFunction(board, inputParser.agentX, inputParser.agentY);
+
+        GeneticAlgorithm geneticAlgorithm = new z3.GeneticAlgorithm.GeneticAlgorithm(
                 maxTime,
                 fitnessFunction,
-                new GeneticAlgorithm.GeneticAlgorithm.InitialPopulation.RandomPopulation(10000, letters, 5),
-                new GeneticAlgorithm.Selection.RouletteWheel(),
-                new GeneticAlgorithm.Crossover.SinglePointCrossover(),
-                new GeneticAlgorithm.Mutation.LetterMutation(letters));
+                new GivenPopulation(initialPopulation),
+                new RouletteWheel(),
+                new SinglePointCrossover(),
+                new LetterMutation());
 
-        z3.GeneticAlgorithm.Genotype topIndividual = geneticAlgorithm.evolve();
+        Genotype topIndividual = geneticAlgorithm.evolve();
 
         topIndividual.setFitness(fitnessFunction.compute(topIndividual.getValue()));
         System.out.println((int)topIndividual.getFitness());
-        System.err.println(topIndividual.getValue());
+        System.err.println(fitnessFunction.printPath(topIndividual.getValue(), true));
+    }
+
+    public static void drawBoard(ArrayList<ArrayList<Integer>> board){
+        for (int i = 0; i < board.size(); i++) {
+            for (int j = 0; j < board.get(i).size(); j++) {
+                System.out.print(board.get(i).get(j));
+            }
+            System.out.println();
+        }
+
     }
 
 

@@ -1,16 +1,18 @@
 package z3.GeneticAlgorithm.Mutation;
 
 import z3.GeneticAlgorithm.Genotype;
-import z3.Letter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LetterMutation implements MutationAlgorithm{
-    private final List<Letter> letters;
+    private final List<String> letters = new ArrayList<>();
 
-    public LetterMutation(List<Letter> letters) {
-        this.letters = letters;
+    public LetterMutation() {
+        this.letters.add("U");
+        this.letters.add("R");
+        this.letters.add("D");
+        this.letters.add("L");
     }
 
     /**
@@ -42,7 +44,12 @@ public class LetterMutation implements MutationAlgorithm{
                     }
                 }
                 else{
+                    //usuniecie litery
                     String word = individual.getValue();
+                    if(word.length() < 2) {
+                        mutatedIndividuals.add(individual);
+                        break;
+                    }
                     int randPos = (int)(Math.random()*(word.length()-2))+1;
                     word = word.substring(0, randPos-1) + word.substring(randPos);
                     mutatedIndividuals.add(new Genotype(word));
@@ -56,6 +63,6 @@ public class LetterMutation implements MutationAlgorithm{
 
     private String getRandomLetter(){
         int pos = (int)(Math.random()*letters.size());
-        return letters.get(pos).getLetter();
+        return letters.get(pos);
     }
 }

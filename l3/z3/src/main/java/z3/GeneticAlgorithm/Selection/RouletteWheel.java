@@ -10,15 +10,18 @@ import java.util.List;
 public class RouletteWheel implements SelectionAlgorithm{
     @Override
     public List<Genotype> select(int numberOfIndividuals, List<Genotype> individuals, TestFunction fitnessFunction) {
+
         List<Genotype> selected = new ArrayList<>();
         double totalFitness = 0;
 
         //compute fitness
         for (int i = 0; i < individuals.size(); i++) {
-            double indFitness = fitnessFunction.compute(individuals.get(i).getValue());
+            double indFitness = 1.0/fitnessFunction.compute(individuals.get(i).getValue());
             individuals.get(i).setFitness(indFitness);
             totalFitness += indFitness;
         }
+
+
 
         //normalize
         for (int i = 0; i < individuals.size(); i++) {
@@ -38,27 +41,18 @@ public class RouletteWheel implements SelectionAlgorithm{
             individuals.get(i).setFitness(accumulatedFitness);
         }
 
-        //finding the one
 
+        //finding the one
         for (int i = 0; i < numberOfIndividuals; i++) {
             double R = Math.random();
 
-            int startIndex = 1;
-            int endIndex = individuals.size();
-
-            while (startIndex + 1 != endIndex) {
-                int middleIndex = (startIndex + endIndex) / 2;
-                if (individuals.get(middleIndex).getFitness() > R && (individuals.get(middleIndex - 1).getFitness() < R)) {
-                    selected.add(individuals.get(middleIndex));
+            for (Genotype individual : individuals) {
+                if (individual.getFitness() > R) {
+                    selected.add(individual);
                     break;
-                } else if (individuals.get(middleIndex).getFitness() < R) {
-                    startIndex = middleIndex;
-                } else {
-                    endIndex = middleIndex;
                 }
             }
         }
-
         return selected;
     }
 

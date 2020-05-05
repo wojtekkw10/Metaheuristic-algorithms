@@ -1,7 +1,7 @@
 package z3.GeneticAlgorithm;
 
 public class Genotype {
-    private final String word;
+    private final String path;
     private double fitness;
 
     public double getFitness() {
@@ -12,18 +12,18 @@ public class Genotype {
         this.fitness = fitness;
     }
 
-    public Genotype(String word) {
-        this.word = word;
+    public Genotype(String path) {
+        this.path = path;
     }
 
     public String getValue() {
-        return word;
+        return path;
     }
 
     @Override
     public String toString() {
         return "Gen{" +
-                word +
+                path +
                 ", fts:" + fitness +
                 '}';
     }

@@ -1,12 +1,25 @@
 package z3;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputParser {
     private int n;
     private int m;
     private int maxTime;
+
+    public List<String> getInitialPaths() {
+        return initialPaths;
+    }
+
+    private List<String> initialPaths = new ArrayList<>();
+
+    public int getPopulationSizeLimit() {
+        return populationSizeLimit;
+    }
+
+    private int populationSizeLimit;
 
     public int agentX;
     public int agentY;
@@ -22,18 +35,28 @@ public class InputParser {
         maxTime = scanner.nextInt();
         n = scanner.nextInt();
         m = scanner.nextInt();
+        int numberOfInitialPaths = scanner.nextInt();
+        populationSizeLimit = scanner.nextInt();
 
         //Remove the /n at the end of the line
         scanner.nextLine();
 
-        while(scanner.hasNextLine()){
+        int lineCounter = 0;
+        while(lineCounter < n){
             ArrayList<Integer> distances = new ArrayList<>();
             String line = scanner.nextLine();
             for(int i=0; i<line.length(); i++){
-
                 distances.add(Integer.parseInt(""+line.charAt(i)));
             }
             graph.add(distances);
+            lineCounter++;
+        }
+
+        lineCounter = 0;
+        while(lineCounter < numberOfInitialPaths){
+            String line = scanner.nextLine();
+            initialPaths.add(line);
+            lineCounter++;
         }
         scanner.close();
 

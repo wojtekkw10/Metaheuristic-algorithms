@@ -1,11 +1,14 @@
 package z3.GeneticAlgorithm;
 
+import z3.App;
 import z3.GeneticAlgorithm.Crossover.CrossoverAlgorithm;
 import z3.GeneticAlgorithm.InitialPopulation.InitialPopulation;
 import z3.GeneticAlgorithm.Mutation.MutationAlgorithm;
 import z3.GeneticAlgorithm.Selection.SelectionAlgorithm;
+import z3.PathTestFunction;
 import z3.TestFunction;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -36,21 +39,26 @@ public class GeneticAlgorithm {
 
         do {
             //wybieramy losowo osobnikow z preferencja na tych lepszych
-            individuals = selectionAlgorithm.select(100, individuals, fitnessFunction);
-
+            individuals = selectionAlgorithm.select((int)(Math.sqrt(App.populationSizeLimit)), individuals, fitnessFunction);
             //tworzymy nowe osobniki na podstawie poprzedniej generacji
             individuals = crossoverAlgorithm.crossover(individuals);
 
             //mutujemy otrzymane osobniki
             individuals = mutationAlgorithm.mutate(individuals, 0.05);
 
+            //czyscimy sciezki
+            List<Genotype> cleanedUp = new ArrayList<>();
+            for (int i = 0; i < individuals.size(); i++) {
+                cleanedUp.add(new Genotype(PathTestFunction.shortenPath(individuals.get(i).getValue())));
+            }
+            individuals = cleanedUp;
+
 /*
             //Wypisujemy najlpeszego osobnika
             List<Genotype> sorted = sortIndividuals(individuals);
             Genotype best = sorted.get(0);
             best.setFitness(fitnessFunction.compute(best.getValue()));
-            System.out.println(best);
-*/
+            System.out.println(best);*/
 
 
             time2 = System.currentTimeMillis();
