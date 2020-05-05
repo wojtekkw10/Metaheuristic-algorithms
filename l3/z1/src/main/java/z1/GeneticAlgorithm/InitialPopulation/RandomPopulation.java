@@ -5,10 +5,10 @@ import z1.GeneticAlgorithm.Genotype;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomInitial implements InitialPopulation{
+public class RandomPopulation implements InitialPopulation{
     private final int size;
 
-    public RandomInitial(int size) {
+    public RandomPopulation(int size) {
         this.size = size;
     }
 

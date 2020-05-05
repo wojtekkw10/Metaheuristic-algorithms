@@ -6,17 +6,13 @@ package z1;
 import z1.GeneticAlgorithm.Crossover.SinglePointCrossover;
 import z1.GeneticAlgorithm.GeneticAlgorithm;
 import z1.GeneticAlgorithm.Genotype;
-import z1.GeneticAlgorithm.InitialPopulation.RandomInitial;
+import z1.GeneticAlgorithm.InitialPopulation.GivenIndividual;
 import z1.GeneticAlgorithm.Mutation.GaussianMutation;
 import z1.GeneticAlgorithm.Selection.TournamentSelection;
 
 import java.util.List;
 
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
-
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
         List<Double> vector = inputParser.getInput();
@@ -28,14 +24,17 @@ public class App {
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(
                 maxTime,
                 fitnessFunction,
-                new RandomInitial(100),
-                new TournamentSelection(10),
+                new GivenIndividual(vector),
+                new TournamentSelection(100),
                 new SinglePointCrossover(),
                 new GaussianMutation());
 
         Genotype topIndividual = geneticAlgorithm.evolve();
         topIndividual.setFitness(fitnessFunction.compute(topIndividual.getValue()));
-        System.out.println(topIndividual);
+        for (int i = 0; i < topIndividual.getValue().size(); i++) {
+            System.out.print(topIndividual.getValue().get(i)+" ");
+        }
+        System.out.println(topIndividual.getFitness());
 
     }
 }

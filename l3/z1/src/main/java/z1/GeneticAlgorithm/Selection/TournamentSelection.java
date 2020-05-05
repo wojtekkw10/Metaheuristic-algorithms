@@ -42,11 +42,11 @@ public class TournamentSelection implements SelectionAlgorithm{
 
     private List<Genotype> getTopIndividuals(int k, List<Genotype> individuals){
         individuals.sort(new GeneticAlgorithm.GenotypeComparator());
-        return individuals.subList(0, k);
+        return individuals.subList(0, Math.min(k, individuals.size()));
     }
 
     private List<Genotype> getRandomIndividuals(int k, List<Genotype> individuals){
         Collections.shuffle(individuals);
-        return individuals.subList(0, k);
+        return individuals.subList(0, Math.min(k, individuals.size()));
     }
 }
