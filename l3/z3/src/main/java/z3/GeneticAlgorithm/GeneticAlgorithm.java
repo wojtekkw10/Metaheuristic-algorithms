@@ -1,10 +1,10 @@
-package z2.GeneticAlgorithm;
+package z3.GeneticAlgorithm;
 
-import z2.GeneticAlgorithm.Crossover.CrossoverAlgorithm;
-import z2.GeneticAlgorithm.InitialPopulation.InitialPopulation;
-import z2.GeneticAlgorithm.Mutation.MutationAlgorithm;
-import z2.GeneticAlgorithm.Selection.SelectionAlgorithm;
-import z2.TestFunction;
+import z3.GeneticAlgorithm.Crossover.CrossoverAlgorithm;
+import z3.GeneticAlgorithm.InitialPopulation.InitialPopulation;
+import z3.GeneticAlgorithm.Mutation.MutationAlgorithm;
+import z3.GeneticAlgorithm.Selection.SelectionAlgorithm;
+import z3.TestFunction;
 
 import java.util.Comparator;
 import java.util.List;

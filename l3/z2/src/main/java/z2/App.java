@@ -21,10 +21,6 @@ public class App {
         List<String> words = inputParser.getWords();
         int maxTime = inputParser.getMaxTime();
 
-        System.out.println(letters);
-        System.out.println(words);
-        System.out.println(maxTime);
-
         WordScoreFunction fitnessFunction = new WordScoreFunction(words, letters);
 
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(
@@ -36,12 +32,10 @@ public class App {
                 new LetterMutation(letters));
 
         Genotype topIndividual = geneticAlgorithm.evolve();
-        /*
+
         topIndividual.setFitness(fitnessFunction.compute(topIndividual.getValue()));
-        for (int i = 0; i < topIndividual.getValue().size(); i++) {
-            System.out.print(topIndividual.getValue().get(i)+" ");
-        }
-        System.out.println(topIndividual.getFitness());*/
+        System.out.println((int)topIndividual.getFitness());
+        System.err.println(topIndividual.getValue());
 
     }
 }
