@@ -28,7 +28,7 @@ public class App {
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(
                 maxTime,
                 fitnessFunction,
-                new RandomInitial(),
+                new RandomInitial(100),
                 new TournamentSelection(10),
                 new SinglePointCrossover(),
                 new GaussianMutation());

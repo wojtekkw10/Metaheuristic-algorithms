@@ -3,10 +3,14 @@ package z1.GeneticAlgorithm.Crossover;
 import z1.GeneticAlgorithm.Genotype;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SinglePointCrossover implements CrossoverAlgorithm{
+    /**
+     * Funkcja wykonuje single-point crossover an podanych wektorach
+     * @param parents lista osobnikow
+     * @return dzieci osobnikow
+     */
     @Override
     public List<Genotype> crossover(List<Genotype> parents) {
         List<Genotype> crossover = new ArrayList<>();

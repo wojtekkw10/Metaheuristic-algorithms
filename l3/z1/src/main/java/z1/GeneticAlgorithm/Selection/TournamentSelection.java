@@ -6,7 +6,6 @@ import z1.TestFunction;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class TournamentSelection implements SelectionAlgorithm{
@@ -16,6 +15,13 @@ public class TournamentSelection implements SelectionAlgorithm{
         this.tournamentSize = tournamentSize;
     }
 
+    /**
+     * Funkcja wykonuje Tournament Selection, tzn. wybierane jest tournamentSize losowych osobnikow, a nastepnie najlepszy z nich
+     * @param numberOfIndividuals liczba osobnikow do wybrania
+     * @param individuals podane osobniki
+     * @param fitnessFunction funkcja fitnessu
+     * @return lista wybranych osobnikow
+     */
     @Override
     public List<Genotype> select(int numberOfIndividuals, List<Genotype> individuals, TestFunction fitnessFunction) {
         List<Genotype> selected = new ArrayList<>();

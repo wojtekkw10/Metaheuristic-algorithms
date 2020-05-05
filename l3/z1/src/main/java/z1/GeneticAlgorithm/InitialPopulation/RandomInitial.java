@@ -6,13 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RandomInitial implements InitialPopulation{
+    private final int size;
+
+    public RandomInitial(int size) {
+        this.size = size;
+    }
+
+    /**
+     * Funkcja generuje wektory [x1,x2,x3,x4,x5] gdzie |xi|<=5
+     * @return wygenerowane wektory
+     */
     @Override
     public List<Genotype> getInitialPopulation() {
         List<Genotype> individuals = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < size; i++) {
             List<Double> vector = new ArrayList<>();
             for (int j = 0; j < 5; j++) {
-                vector.add(Math.random()*5);
+                if(Math.random()>5) vector.add(Math.random()*5);
+                else vector.add(-Math.random()*5);
             }
             individuals.add(new Genotype(vector));
         }

@@ -7,6 +7,12 @@ import java.util.List;
 import java.util.Random;
 
 public class GaussianMutation implements MutationAlgorithm{
+    /**
+     * Funkcja bierze liste osobnikow i losowo mutuje ich wektory z podanym prawdopodobienstwem
+     * @param individuals osobniki do mutowania
+     * @param mutationProbability niezalezne prawdopobienstwo mutacji wspolrzednej wektora
+     * @return lista osobnikow
+     */
     @Override
     public List<Genotype> mutate(List<Genotype> individuals, double mutationProbability) {
         List<Genotype> mutatedIndividuals = new ArrayList<>();
