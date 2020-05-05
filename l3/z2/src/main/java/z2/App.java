@@ -6,8 +6,9 @@ package z2;
 import z2.GeneticAlgorithm.Crossover.SinglePointCrossover;
 import z2.GeneticAlgorithm.GeneticAlgorithm;
 import z2.GeneticAlgorithm.Genotype;
-import z2.GeneticAlgorithm.InitialPopulation.GivenIndividual;
-import z2.GeneticAlgorithm.Mutation.GaussianMutation;
+import z2.GeneticAlgorithm.InitialPopulation.RandomPopulation;
+import z2.GeneticAlgorithm.Mutation.LetterMutation;
+import z2.GeneticAlgorithm.Selection.RouletteWheel;
 import z2.GeneticAlgorithm.Selection.TournamentSelection;
 
 import java.util.List;
@@ -15,26 +16,32 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
-        List<Double> vector = inputParser.getInput();
-        List<Double> functionFactors = inputParser.getFactors();
+        inputParser.getInput();
+        List<Letter> letters = inputParser.getLetters();
+        List<String> words = inputParser.getWords();
         int maxTime = inputParser.getMaxTime();
 
-        TestFunction fitnessFunction = new YangFunction(functionFactors);
+        System.out.println(letters);
+        System.out.println(words);
+        System.out.println(maxTime);
+
+        WordScoreFunction fitnessFunction = new WordScoreFunction(words, letters);
 
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(
                 maxTime,
                 fitnessFunction,
-                new GivenIndividual(vector),
-                new TournamentSelection(100),
+                new RandomPopulation(10000, letters, 5),
+                new RouletteWheel(),
                 new SinglePointCrossover(),
-                new GaussianMutation());
+                new LetterMutation(letters));
 
         Genotype topIndividual = geneticAlgorithm.evolve();
+        /*
         topIndividual.setFitness(fitnessFunction.compute(topIndividual.getValue()));
         for (int i = 0; i < topIndividual.getValue().size(); i++) {
             System.out.print(topIndividual.getValue().get(i)+" ");
         }
-        System.out.println(topIndividual.getFitness());
+        System.out.println(topIndividual.getFitness());*/
 
     }
 }

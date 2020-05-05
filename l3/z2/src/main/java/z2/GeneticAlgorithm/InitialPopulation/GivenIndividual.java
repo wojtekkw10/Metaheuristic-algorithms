@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GivenIndividual implements InitialPopulation{
-    public GivenIndividual(List<Double> givenVector) {
-        this.givenVector = givenVector;
+    public GivenIndividual(String word) {
+        this.word = word;
     }
 
-    private final List<Double> givenVector;
+    private final String word;
     @Override
     public List<Genotype> getInitialPopulation() {
         List<Genotype> individuals = new ArrayList<>();
-        individuals.add(new Genotype(givenVector));
+        individuals.add(new Genotype(word));
         return individuals;
     }
 }

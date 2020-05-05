@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SinglePointCrossover implements CrossoverAlgorithm{
     /**
-     * Funkcja wykonuje single-point crossover an podanych wektorach
+     * Funkcja wykonuje single-point crossover na slowach
      * @param parents lista osobnikow
      * @return dzieci osobnikow
      */
@@ -17,13 +17,18 @@ public class SinglePointCrossover implements CrossoverAlgorithm{
 
         for (int i = 0; i < parents.size(); i++) {
             for (Genotype parent : parents) {
-                int crossoverPoint = (int) (Math.random() * parents.get(i).getValue().size());
-                List<Double> newVector = new ArrayList<>();
-                newVector.addAll(parents.get(i).getValue().subList(0, crossoverPoint));
-                newVector.addAll(parent.getValue().subList(crossoverPoint, parents.get(0).getValue().size()));
+                //System.out.println("CROSSOWANIE");
 
-                if (newVector.size() != parents.get(0).getValue().size()) throw new IllegalStateException();
-                crossover.add(new Genotype(newVector));
+                String parent1 = parents.get(i).getValue();
+                String parent2 = parent.getValue();
+
+                if(parent1.length() == 0 || parent2.length() == 0) continue;
+
+                int crossoverPoint = (int) (Math.random() * (parent1.length()-2))+1;
+
+                String newWord = parent1.substring(0, crossoverPoint) + parent2.substring(Math.min(crossoverPoint, parent2.length()));
+
+                crossover.add(new Genotype(newWord));
             }
         }
 

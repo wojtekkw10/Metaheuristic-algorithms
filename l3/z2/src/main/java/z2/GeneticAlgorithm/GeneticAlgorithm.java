@@ -44,13 +44,13 @@ public class GeneticAlgorithm {
             //mutujemy otrzymane osobniki
             individuals = mutationAlgorithm.mutate(individuals, 0.05);
 
-            /*
+
             //Wypisujemy najlpeszego osobnika
             List<Genotype> sorted = sortIndividuals(individuals);
             Genotype best = sorted.get(0);
             best.setFitness(fitnessFunction.compute(best.getValue()));
             System.out.println(best);
-            */
+
 
             time2 = System.currentTimeMillis();
         } while ((double) (time2 - time1) / 1000 < maxTime);

@@ -3,7 +3,8 @@ package z2.GeneticAlgorithm;
 import java.util.List;
 
 public class Genotype {
-    private final List<Double> vector;
+    private final String word;
+    private double fitness;
 
     public double getFitness() {
         return fitness;
@@ -13,21 +14,19 @@ public class Genotype {
         this.fitness = fitness;
     }
 
-    private double fitness;
-
-    public Genotype(List<Double> vector) {
-        this.vector = vector;
+    public Genotype(String word) {
+        this.word = word;
     }
 
-    public List<Double> getValue() {
-        return vector;
+    public String getValue() {
+        return word;
     }
 
     @Override
     public String toString() {
-        return "Genotype{" +
-                vector +
-                ", fitness=" + fitness +
+        return "Gen{" +
+                word +
+                ", fts:" + fitness +
                 '}';
     }
 }
