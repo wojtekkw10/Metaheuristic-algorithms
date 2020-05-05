@@ -1,8 +1,8 @@
-package z2.GeneticAlgorithm.Selection;
+package z1.GeneticAlgorithm.Selection;
 
-import z2.GeneticAlgorithm.GeneticAlgorithm;
-import z2.GeneticAlgorithm.Genotype;
-import z2.TestFunction;
+import z1.GeneticAlgorithm.GeneticAlgorithm;
+import z1.GeneticAlgorithm.Genotype;
+import z1.TestFunction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +15,13 @@ public class RouletteWheel implements SelectionAlgorithm{
 
         //compute fitness
         for (int i = 0; i < individuals.size(); i++) {
-            double indFitness = fitnessFunction.compute(individuals.get(i).getValue());
+            double indFitness = 1/fitnessFunction.compute(individuals.get(i).getValue()); // 1/x for inversely proportional
             individuals.get(i).setFitness(indFitness);
             totalFitness += indFitness;
         }
 
         //normalize
         for (int i = 0; i < individuals.size(); i++) {
-            //double indFitness = fitnessFunction.compute(individuals.get(i).getValue());
             double indFitness = individuals.get(i).getFitness();
             individuals.get(i).setFitness(indFitness/totalFitness);
         }
@@ -40,22 +39,29 @@ public class RouletteWheel implements SelectionAlgorithm{
 
         //finding the one
 
-        for (int i = 0; i < numberOfIndividuals; i++) {
-            double R = Math.random();
+        if(individuals.size() > 1){
+            for (int i = 0; i < numberOfIndividuals; i++) {
+                double R = Math.random();
 
-            int startIndex = 1;
-            int endIndex = individuals.size();
+                int startIndex = 1;
+                int endIndex = individuals.size();
 
-            while (startIndex + 1 != endIndex) {
-                int middleIndex = (startIndex + endIndex) / 2;
-                if (individuals.get(middleIndex).getFitness() > R && (individuals.get(middleIndex - 1).getFitness() < R)) {
-                    selected.add(individuals.get(middleIndex));
-                    break;
-                } else if (individuals.get(middleIndex).getFitness() < R) {
-                    startIndex = middleIndex;
-                } else {
-                    endIndex = middleIndex;
+                while (startIndex + 1 != endIndex) {
+                    int middleIndex = (startIndex + endIndex) / 2;
+                    if (individuals.get(middleIndex).getFitness() > R && (individuals.get(middleIndex - 1).getFitness() < R)) {
+                        selected.add(individuals.get(middleIndex));
+                        break;
+                    } else if (individuals.get(middleIndex).getFitness() < R) {
+                        startIndex = middleIndex;
+                    } else {
+                        endIndex = middleIndex;
+                    }
                 }
+            }
+        }
+        else{
+            for (int i = 0; i < numberOfIndividuals; i++) {
+                selected.add(individuals.get(0));
             }
         }
 

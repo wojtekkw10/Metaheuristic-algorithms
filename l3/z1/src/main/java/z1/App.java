@@ -8,6 +8,7 @@ import z1.GeneticAlgorithm.GeneticAlgorithm;
 import z1.GeneticAlgorithm.Genotype;
 import z1.GeneticAlgorithm.InitialPopulation.GivenIndividual;
 import z1.GeneticAlgorithm.Mutation.GaussianMutation;
+import z1.GeneticAlgorithm.Selection.RouletteWheel;
 import z1.GeneticAlgorithm.Selection.TournamentSelection;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class App {
                 maxTime,
                 fitnessFunction,
                 new GivenIndividual(vector),
-                new TournamentSelection(100),
+                new RouletteWheel(),
                 new SinglePointCrossover(),
                 new GaussianMutation());
 

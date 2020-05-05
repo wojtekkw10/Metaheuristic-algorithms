@@ -36,13 +36,14 @@ public class GeneticAlgorithm {
 
         do {
             //wybieramy losowo osobnikow z preferencja na tych lepszych
-            individuals = selectionAlgorithm.select(100, individuals, fitnessFunction);
+            individuals = selectionAlgorithm.select(10, individuals, fitnessFunction);
 
             //tworzymy nowe osobniki na podstawie poprzedniej generacji
             individuals = crossoverAlgorithm.crossover(individuals);
 
             //mutujemy otrzymane osobniki
             individuals = mutationAlgorithm.mutate(individuals, 0.05);
+
 
             /*
             //Wypisujemy najlpeszego osobnika
@@ -68,6 +69,13 @@ public class GeneticAlgorithm {
         @Override
         public int compare(Genotype genotype, Genotype t1) {
             return Double.compare(genotype.getFitness(), t1.getFitness());
+        }
+    }
+
+    public static class ReverseGenotypeComparator implements Comparator<Genotype> {
+        @Override
+        public int compare(Genotype genotype, Genotype t1) {
+            return Double.compare(t1.getFitness(), genotype.getFitness());
         }
     }
 }
