@@ -1,26 +1,25 @@
 package z2;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputParser {
     private int maxTime;
-    private int lettersSetSize;
-    private int wordsSetSize;
-    private List<Letter> letters = new ArrayList<>();
-    private List<String> words = new ArrayList<>();
+    private final List<Letter> letters = new ArrayList<>();
+    private final List<String> words = new ArrayList<>();
 
     /**
      * Funkcja pobiera dane ze standardowego wejścia i parsuje do odpowiednich struktur danych
-     * @return wektor początkowy
      */
     public void getInput(){
         Scanner scanner = new Scanner(System.in);
 
         maxTime = scanner.nextInt();
-        lettersSetSize = scanner.nextInt();
-        wordsSetSize = scanner.nextInt();
+        int lettersSetSize = scanner.nextInt();
+        int wordsSetSize = scanner.nextInt();
 
         //to remove the \n
         scanner.nextLine();
@@ -39,6 +38,22 @@ public class InputParser {
         }
 
         scanner.close();
+    }
+
+    public List<String> loadDict(){
+        List<String> words = new ArrayList<>();
+        File file = new File("dict.txt");
+        Scanner sc = null;
+        try {
+            sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                words.add(sc.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("FILE dict.txt NOT FOUND");
+        }
+        return words;
     }
 
     public int getMaxTime() {

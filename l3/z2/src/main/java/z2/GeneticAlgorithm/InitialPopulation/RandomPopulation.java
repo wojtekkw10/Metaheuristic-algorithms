@@ -10,13 +10,11 @@ import java.util.List;
 public class RandomPopulation implements InitialPopulation{
     private final int size;
     private final List<Letter> letters;
-    private final int maxWordLength;
 
 
-    public RandomPopulation(int size, List<Letter> letters, int maxWordLength) {
+    public RandomPopulation(int size, List<Letter> letters) {
         this.size = size;
         this.letters = letters;
-        this.maxWordLength = maxWordLength;
     }
 
     /**
@@ -33,11 +31,20 @@ public class RandomPopulation implements InitialPopulation{
         return individuals;
     }
 
-    private String getRandomLetter(List<Letter> letters){
+    /**
+     * Funkcja zwraca losowa litere z listy liter
+     * @param letters lista liter
+     * @return wylosowana litera
+     */
+    private Letter getRandomLetter(List<Letter> letters){
         int pos = (int)(Math.random()*letters.size());
-        return letters.get(pos).getLetter();
+        return letters.get(pos);
     }
 
+    /**
+     * Funkcja tworzy losowe slowo z dostepnych liter
+     * @return wygenerowane slowo
+     */
     private String getRandomWord(){
         //create a word out of the available letters
         //letter can only be used once
@@ -51,8 +58,8 @@ public class RandomPopulation implements InitialPopulation{
 
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < randLength; i++) {
-            String letter = getRandomLetter(availableLetters);
-            word.append(letter);
+            Letter letter = getRandomLetter(availableLetters);
+            word.append(letter.getLetter());
             availableLetters.remove(letter);
         }
 

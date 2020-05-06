@@ -1,8 +1,8 @@
 package z2;
 
 public class Letter {
-    private String letter;
-    private int score;
+    private final String letter;
+    private final int score;
 
     public Letter(String letter, int score) {
         this.letter = letter;

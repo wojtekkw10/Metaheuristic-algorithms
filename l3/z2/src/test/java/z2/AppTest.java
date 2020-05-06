@@ -4,10 +4,45 @@
 package z2;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class AppTest {
     @Test public void testAppHasAGreeting() {
         App classUnderTest = new App();
+    }
+
+    @Test public void testDictSearch(){
+        InputParser ip = new InputParser();
+        List<String> words = ip.loadDict();
+
+        List<Letter> letters = new ArrayList<>();
+        letters.add(new Letter("u", 3));
+        letters.add(new Letter("j", 1));
+        letters.add(new Letter("e", 4));
+        letters.add(new Letter("k", 0));
+        letters.add(new Letter("a", 1));
+        letters.add(new Letter("e", 4));
+        letters.add(new Letter("r", 7));
+        letters.add(new Letter("i", 2));
+        letters.add(new Letter("x", 4));
+        letters.add(new Letter("e", 4));
+        letters.add(new Letter("d", 6));
+        letters.add(new Letter("i", 2));
+        letters.add(new Letter("w", 3));
+        letters.add(new Letter("s", 1));
+        letters.add(new Letter("o", 2));
+        letters.add(new Letter("n", 4));
+        letters.add(new Letter("a", 1));
+        letters.add(new Letter("r", 7));
+
+        WordScoreFunction fn = new WordScoreFunction(words, letters);
+
+        for (String word : words) {
+            assertTrue(fn.isInDict(word.toLowerCase()));
+        }
     }
 }

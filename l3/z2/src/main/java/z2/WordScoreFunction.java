@@ -8,12 +8,13 @@ public class WordScoreFunction extends TestFunction {
     List<String> words = new ArrayList<>();
     List<Letter> letters;
 
-    public WordScoreFunction(List<String> words, List<Letter> letters) {
+    public WordScoreFunction(List<String> words1, List<Letter> letters) {
         //lowercase all words
-        for (String word : words) {
-            this.words.add(word.toLowerCase(Locale.US));
+        for (String word : words1) {
+            this.words.add(word.toLowerCase());
         }
-        this.words = words;
+        this.words.sort(String.CASE_INSENSITIVE_ORDER);
+        //this.words = words1;
         this.letters = letters;
     }
 
@@ -30,9 +31,12 @@ public class WordScoreFunction extends TestFunction {
         int startIndex = 0;
         int endIndex = words.size();
 
-        while(endIndex - startIndex > 5 ){
+        if(words.get(startIndex).equals(word)) return true;
+        if(words.get(endIndex-1).equals(word)) return true;
+
+        while(endIndex - startIndex > 1){
             int middleIndex = (startIndex+endIndex)/2;
-            if(startIndex == middleIndex) middleIndex++;
+
             if(words.get(middleIndex).equals(word)) return true;
             else if(words.get(middleIndex).compareTo(word) < 0){
                 startIndex = middleIndex;
@@ -40,9 +44,6 @@ public class WordScoreFunction extends TestFunction {
             else{
                 endIndex = middleIndex;
             }
-        }
-        for (int i = startIndex; i < endIndex; i++) {
-            if(words.get(i).equals(word)) return true;
         }
         return false;
     }

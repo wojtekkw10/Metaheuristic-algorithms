@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouletteWheel implements SelectionAlgorithm{
+    /**
+     * Funkcja wykonuje selekcje typu RouletteWheel, tzn. prawdopodobienstwo wybrania osobnika jest proporcjonalne do jego fitnessu
+     * @param numberOfIndividuals liczba osobnikow ktora oczekujemy na wyjsciu
+     * @param individuals podane osobniki, z ktorych wybieramy
+     * @param fitnessFunction funkcja fitnessu
+     * @return wybrane osobniki
+     */
     @Override
     public List<Genotype> select(int numberOfIndividuals, List<Genotype> individuals, TestFunction fitnessFunction) {
 
@@ -20,8 +27,6 @@ public class RouletteWheel implements SelectionAlgorithm{
             individuals.get(i).setFitness(indFitness);
             totalFitness += indFitness;
         }
-
-
 
         //normalize
         for (int i = 0; i < individuals.size(); i++) {
@@ -41,7 +46,6 @@ public class RouletteWheel implements SelectionAlgorithm{
             individuals.get(i).setFitness(accumulatedFitness);
         }
 
-
         //finding the one
         for (int i = 0; i < numberOfIndividuals; i++) {
             double R = Math.random();
@@ -54,14 +58,5 @@ public class RouletteWheel implements SelectionAlgorithm{
             }
         }
         return selected;
-    }
-
-    private double getTotalFitness(List<Genotype> individuals){
-        double totalFitness = 0;
-
-        for (Genotype individual : individuals) {
-            totalFitness += individual.getFitness();
-        }
-        return totalFitness;
     }
 }

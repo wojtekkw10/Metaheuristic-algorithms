@@ -62,7 +62,7 @@ public class RouletteWheel implements SelectionAlgorithm{
                     selected.add(individuals.get(endIndex));
                 }
 
-                while (startIndex + 1 != endIndex) {
+                while (endIndex - startIndex > 1) {
                     int middleIndex = (startIndex + endIndex) / 2;
                     if (individuals.get(middleIndex).getFitness() > R && (individuals.get(middleIndex - 1).getFitness() < R)) {
                         selected.add(individuals.get(middleIndex));

@@ -107,6 +107,11 @@ public class PathTestFunction extends TestFunction{
         return sb.toString();
     }
 
+    /**
+     * jezeli sciezka dochodzi do cyfry 8, sciezka jest obcinana do tego wlasnie momentu
+     * @param path podana sciezka
+     * @return skrocona sciezka
+     */
     public static String shortenPath(String path){
         ArrayList<String> arrPath = new ArrayList<>();
         for (int i = 0; i < path.length(); i++) {

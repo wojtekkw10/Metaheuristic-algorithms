@@ -17,7 +17,6 @@ public class App {
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
         ArrayList<ArrayList<Integer>> board = inputParser.getInput();
-        drawBoard(board);
         int maxTime = inputParser.getMaxTime();
         populationSizeLimit = inputParser.getPopulationSizeLimit();
         List<String> initialPaths = inputParser.getInitialPaths();

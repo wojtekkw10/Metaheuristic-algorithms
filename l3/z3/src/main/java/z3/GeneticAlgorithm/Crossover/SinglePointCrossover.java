@@ -17,7 +17,6 @@ public class SinglePointCrossover implements CrossoverAlgorithm{
 
         for (int i = 0; i < parents.size(); i++) {
             for (Genotype parent : parents) {
-                //System.out.println("CROSSOWANIE");
 
                 String parent1 = parents.get(i).getValue();
                 String parent2 = parent.getValue();

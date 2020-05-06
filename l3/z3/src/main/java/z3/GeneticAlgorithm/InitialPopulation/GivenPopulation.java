@@ -11,6 +11,10 @@ public class GivenPopulation implements InitialPopulation{
 
     List<Genotype> population;
 
+    /**
+     * Funkcja zwraca sciezki podane w konstruktorze
+     * @return podane sciezki
+     */
     @Override
     public List<Genotype> getInitialPopulation() {
         return population;

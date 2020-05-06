@@ -13,12 +13,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public class GeneticAlgorithm {
-    private TestFunction fitnessFunction;
-    private InitialPopulation initialPopulation;
-    private SelectionAlgorithm selectionAlgorithm;
-    private CrossoverAlgorithm crossoverAlgorithm;
-    private MutationAlgorithm mutationAlgorithm;
-    private int maxTime;
+    private final TestFunction fitnessFunction;
+    private final InitialPopulation initialPopulation;
+    private final SelectionAlgorithm selectionAlgorithm;
+    private final CrossoverAlgorithm crossoverAlgorithm;
+    private final MutationAlgorithm mutationAlgorithm;
+    private final int maxTime;
 
     public GeneticAlgorithm(int maxTime, TestFunction testFunction, InitialPopulation initialPopulation,
                             SelectionAlgorithm selectionAlgorithm, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm){
@@ -40,6 +40,7 @@ public class GeneticAlgorithm {
         do {
             //wybieramy losowo osobnikow z preferencja na tych lepszych
             individuals = selectionAlgorithm.select((int)(Math.sqrt(App.populationSizeLimit)), individuals, fitnessFunction);
+
             //tworzymy nowe osobniki na podstawie poprzedniej generacji
             individuals = crossoverAlgorithm.crossover(individuals);
 
@@ -54,12 +55,11 @@ public class GeneticAlgorithm {
             individuals = cleanedUp;
 
 /*
-            //Wypisujemy najlpeszego osobnika
+            //Wypisujemy najlepszego osobnika
             List<Genotype> sorted = sortIndividuals(individuals);
             Genotype best = sorted.get(0);
             best.setFitness(fitnessFunction.compute(best.getValue()));
             System.out.println(best);*/
-
 
             time2 = System.currentTimeMillis();
         } while ((double) (time2 - time1) / 1000 < maxTime);

@@ -45,7 +45,7 @@ public class GeneticAlgorithm {
             individuals = mutationAlgorithm.mutate(individuals, 0.05);
 
 /*
-            //Wypisujemy najlpeszego osobnika
+            //Wypisujemy najlepszego osobnika
             List<Genotype> sorted = sortIndividuals(individuals);
             Genotype best = sorted.get(0);
             best.setFitness(fitnessFunction.compute(best.getValue()));
