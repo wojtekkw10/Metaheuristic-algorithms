@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class InputParser {
     private int n;
     private int maxTime;
-    private List<Double> factors = new ArrayList<>();
+    private final List<Double> factors = new ArrayList<>();
 
     /**
      * Funkcja pobiera dane ze standardowego wejścia i parsuje do odpowiednich struktur danych

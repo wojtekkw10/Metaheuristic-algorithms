@@ -11,7 +11,7 @@ public class GaussianMutation implements MutationAlgorithm{
      * Funkcja bierze liste osobnikow i losowo mutuje ich wektory z podanym prawdopodobienstwem
      * @param individuals osobniki do mutowania
      * @param mutationProbability niezalezne prawdopobienstwo mutacji wspolrzednej wektora
-     * @return lista osobnikow
+     * @return lista osobnikow (zmutowanych i niezmutowaych)
      */
     @Override
     public List<Genotype> mutate(List<Genotype> individuals, double mutationProbability) {
@@ -20,9 +20,11 @@ public class GaussianMutation implements MutationAlgorithm{
 
         for (Genotype individual : individuals) {
             if (Math.random() < mutationProbability) {
+                //bierzemy losowa wartosc z rozkladu normalnego
                 double gaussian = random.nextGaussian();
                 if (Math.random() > 0.5) gaussian = -gaussian;
 
+                //tworzymy nowy wektor (zmutowany)
                 List<Double> vector = individual.getValue();
                 int randPos = (int)(Math.random()*individual.getValue().size());
                 double newValue = individual.getValue().get(randPos) + gaussian;

@@ -10,12 +10,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public class GeneticAlgorithm {
-    private TestFunction fitnessFunction;
-    private InitialPopulation initialPopulation;
-    private SelectionAlgorithm selectionAlgorithm;
-    private CrossoverAlgorithm crossoverAlgorithm;
-    private MutationAlgorithm mutationAlgorithm;
-    private int maxTime;
+    private final TestFunction fitnessFunction;
+    private final InitialPopulation initialPopulation;
+    private final SelectionAlgorithm selectionAlgorithm;
+    private final CrossoverAlgorithm crossoverAlgorithm;
+    private final MutationAlgorithm mutationAlgorithm;
+    private final int maxTime;
 
     public GeneticAlgorithm(int maxTime, TestFunction testFunction, InitialPopulation initialPopulation,
                             SelectionAlgorithm selectionAlgorithm, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm){
@@ -25,8 +25,6 @@ public class GeneticAlgorithm {
         this.crossoverAlgorithm = crossoverAlgorithm;
         this.mutationAlgorithm = mutationAlgorithm;
         this.maxTime = maxTime;
-
-
     }
 
     public Genotype evolve(){
@@ -46,7 +44,7 @@ public class GeneticAlgorithm {
 
 
             /*
-            //Wypisujemy najlpeszego osobnika
+            //Wypisujemy najlpszego osobnika
             List<Genotype> sorted = sortIndividuals(individuals);
             Genotype best = sorted.get(0);
             best.setFitness(fitnessFunction.compute(best.getValue()));
@@ -69,13 +67,6 @@ public class GeneticAlgorithm {
         @Override
         public int compare(Genotype genotype, Genotype t1) {
             return Double.compare(genotype.getFitness(), t1.getFitness());
-        }
-    }
-
-    public static class ReverseGenotypeComparator implements Comparator<Genotype> {
-        @Override
-        public int compare(Genotype genotype, Genotype t1) {
-            return Double.compare(t1.getFitness(), genotype.getFitness());
         }
     }
 }

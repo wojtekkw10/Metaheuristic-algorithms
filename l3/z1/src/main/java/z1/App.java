@@ -9,7 +9,6 @@ import z1.GeneticAlgorithm.Genotype;
 import z1.GeneticAlgorithm.InitialPopulation.GivenIndividual;
 import z1.GeneticAlgorithm.Mutation.GaussianMutation;
 import z1.GeneticAlgorithm.Selection.RouletteWheel;
-import z1.GeneticAlgorithm.Selection.TournamentSelection;
 
 import java.util.List;
 
